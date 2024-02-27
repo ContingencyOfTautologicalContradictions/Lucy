@@ -1,6 +1,4 @@
-# Project Lucy
-
-![logo](https://github.com/ContingencyOfTautologicalContradictions/Lucy/blob/main/Logo.jpeg)
+![logo](https://github.com/ContingencyOfTautologicalContradictions/Lucy/blob/main/Logo.png)
 
 A modern, C++23 multi-platform game engine, with a focus on 3D
 
