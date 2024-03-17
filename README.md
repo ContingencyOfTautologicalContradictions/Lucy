@@ -59,6 +59,8 @@ The following requirements are specific of each system:
 ### For Android
 
 - Define the macro ``lucy_android``
+- Latest Android NDK (R26+)
+- Latest Android SDK (34+)
 - Latest Android Studio (3.2.1+)
 - Latest Gradle (8.2+)
 - A GPU supporting Vulkan 1.3+
