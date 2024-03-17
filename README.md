@@ -20,6 +20,15 @@ For example, if the Lucy's version is 3.0.1, these macros would be defined as:
 The actual version is ``0.0.1``.
 
 
+## Debug
+
+To enable the debug mode within Lucy, you must define the macro ``lucy_debug``. To build for release (non-debug) mode, don't define anything.
+
+The debug mode will use C++ exceptions (and therefore RTTI) to better notify the Lucy's users about what went wrong.
+
+The release mode will assume exceptions and RTTI are disabled, and abort once an abnormal situation was found.
+
+
 ## Requirements
 
 - 64-bits address space
@@ -27,33 +36,45 @@ The actual version is ``0.0.1``.
 - CMake 3.28.3+
 - Ninja 1.11.1+
   
-### For macOS and iOS
+### For macOS
 
-- Latest macOS (14.3.1+)
-- Latest iOS Simulator (17.3.1+)
-- Latest XCode (15.2+)
-- A GPU capable of running the Metal Shading Language 3.1+
+- Define the macro ``lucy_mac``
+- Latest macOS (14.4+)
+- Latest XCode (15.3+)
+- A GPU supporting Metal Shading Language 3.1+
+
+### For iOS
+
+- Define the macro ``lucy_ios``
+- Latest iOS (17.4+)
+- Latest iOS Simulator (17.4+)
+- Latest macOS (14.4+)
+- Latest XCode (15.3+)
+- A GPU supporting Metal Shading Language 3.1+
 
 ### For Android
 
+- Define the macro ``lucy_android``
 - Latest Android Studio (3.2.1+)
 - Latest Gradle (8.2+)
-- A mobile-device capable of running Vulkan 1.3+
+- A GPU supporting Vulkan 1.3+
 
 ### For Linux
 
+- Define the macro ``lucy_linux``
 - Latest Linux kernel
-- Latest Wayland library (1.20+)
+- Latest Wayland library (1.21+)
 - Latest GCC (14+)
 - Latest Vulkan (1.3+)
-- A GPU capable of running Vulkan 1.3+
+- A GPU supporting Vulkan 1.3+
 
 ### For Windows
 
+- Define the macro ``lucy_windows``
 - Latest Windows 11+
 - Latest Visual Studio 2022 (17.6+)
 - Latest Windows 11 Kit (10.0.22621+)
-- A GPU capable of running D3D12+
+- A GPU supporting the latest D3D12+
 
 
 ## Documentation
@@ -75,6 +96,6 @@ The following profiles are supported:
 - ``Memory``: Ensures memory safety. By enabling this profile, raw pointers will be safer. To enable it, define the macro ``lucy_memory_profile``.
 - ``Concurrency``: Ensures thread safety. By enabling this profile, data races and deadlocks will be mitigated. To enable it, define the macro ``lucy_concurrency_profile``.
 
-If you want multiple profiles, then simply define their respective macros for the same build.
+If you want multiple profiles, define their respective macros.
 
-If you don't want to use profiles, simply don't define any of these mentioned macros.
+If you don't want to use profiles, don't define any of these mentioned macros.
