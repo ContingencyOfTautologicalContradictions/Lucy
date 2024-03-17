@@ -1,5 +1,5 @@
-#ifndef lucy_meta_nullpointer
-#define lucy_meta_nullpointer
+#ifndef lucy_core_nullpointer
+#define lucy_core_nullpointer
 #if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 
 namespace Lucy
