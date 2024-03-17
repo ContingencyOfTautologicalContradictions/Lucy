@@ -5,7 +5,7 @@
 namespace Lucy
 {
     /**
-    @brief The type of the null pointer literal
+    The type of the null pointer literal (nullptr)
     */
     using NullPointer = decltype(nullptr);
 }
