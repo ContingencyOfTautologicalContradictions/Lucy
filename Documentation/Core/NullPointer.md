@@ -1,4 +1,9 @@
 # Lucy::NullPointer
+```css
+LAST MODIFICATION - 17/03/2024
+```
+
+Declared at ``Core/NullPointer.hpp``
 
 ```cpp
 namespace Lucy
