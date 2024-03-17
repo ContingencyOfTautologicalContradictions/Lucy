@@ -31,10 +31,14 @@ The release mode will assume exceptions and RTTI are disabled, and abort once an
 
 ## Requirements
 
+The supported systems for now are ``macOS (arm64)``, ``iOS (arm64)``, ``Android (arm64)``, ``Linux (arm64, risc-v, amd64)``, and ``Windows (amd64)``.
+
+The general requirements for any of these supported platforms are:
+
 - 64-bits address space
 - Git 2.44+
-- CMake 3.28.3+
-- Ninja 1.11.1+
+
+The following requirements are specific of each system:
   
 ### For macOS
 
