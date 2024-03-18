@@ -1,6 +1,6 @@
 # Lucy::NullPointer
 ```css
-LAST MODIFICATION - 17/03/2024
+LAST MODIFICATION - 18/03/2024
 ```
 
 Declared at ``Core/NullPointer.hpp``
@@ -21,12 +21,12 @@ The type of the null pointer literal (``nullptr``).
 #include <print>
 #include <Core/NullPointer.hpp>
 
-void foo(int* ptr)
+void print_value(int* ptr)
 {
 	std::println("The value of the pointer is {}", *ptr);
 }
 
-void foo(Lucy::NullPointer)
+void print_value(Lucy::NullPointer)
 {
 	std::println("Oh no, a null pointer!");
 }
@@ -34,7 +34,7 @@ void foo(Lucy::NullPointer)
 int main()
 {
 	int a = 42, *b = &a;
-	foo(b); // derives to foo(int*)
-	foo(nullptr); // derives to foo(Lucy::NullPointer)
+	print_value(b); // derives to print_value(int*)
+	print_value(nullptr); // derives to print_value(Lucy::NullPointer)
 }
 ```
