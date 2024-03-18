@@ -1,6 +1,6 @@
 ![logo](https://github.com/ContingencyOfTautologicalContradictions/Lucy/blob/main/Logo.png)
 
-A modern, C++23 multi-platform game engine, with a focus on safety, performance and completeness.
+A modern, C++23 multi-platform general-purpose library, with a focus on safety, performance and completeness.
 
 
 ## Compilers
