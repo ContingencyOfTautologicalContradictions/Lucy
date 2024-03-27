@@ -4,11 +4,6 @@
 
 namespace Lucy
 {
-    /**
-    Terminates the running program abnormally.
-    
-    The destructors of any created instance that remains within its lifetime are not invoked.
-    */
     [[noreturn]] auto Abort() noexcept -> void;
 }
 
