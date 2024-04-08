@@ -190,15 +190,6 @@ The following requirements are specific of each system:
 - Define the macro ``lucy_xss`` to enable XSS intrinsics
 
 
-## Documentation
-
-The documentation's layout is the same as the source's layout:
-
-If you want to consult the documentation of ``Source/Meta/Same.hpp``, head to ``Documentation/Meta/Same.md``.
-
-I recommend using a Markdown renderer for reading the .md files, such as Obsidian.
-
-
 ## Profiles
 
 Lucy supports the different profiles proposed for C++, that target different needs based on safety.
