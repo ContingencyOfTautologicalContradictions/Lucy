@@ -2,6 +2,8 @@
 
 A modern, C++23 multi-platform general-purpose library, with a focus on safety, performance and completeness.
 
+Lucy is based on C++20 modules, so please handle these correctly at your build system of preference.
+
 
 ## Compilers
 
