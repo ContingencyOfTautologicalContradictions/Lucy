@@ -13,5 +13,5 @@
 #define lucy_what exception_object_private_and_secret.Message()
 #define lucy_operator_throwable(type) (::PackedException<type>&& exception_object_private_and_secret)
 #define lucy_operator_detect(type, instance) PackedException<type>(exception_object_private_and_secret, instance)
-#define lucy_operator_parameter exception_object_private_and_secret.instance
+#define lucy_throwable_parameter exception_object_private_and_secret.instance
 #endif
