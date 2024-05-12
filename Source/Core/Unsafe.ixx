@@ -1,4 +1,5 @@
 export module Lucy.Core.Unsafe;
+import Lucy.Core.Forward;
 
 export class [[nodiscard]] Unsafe
 {
@@ -14,4 +15,12 @@ public:
     constexpr auto operator=(const Unsafe& other) noexcept -> Unsafe& = delete;
 
     constexpr auto operator=(Unsafe&& other) noexcept -> Unsafe& = delete;
+};
+
+export template<class T> class [[nodiscard]] PackedUnsafe
+{
+public:
+    T instance;
+
+    template<class U> constexpr PackedUnsafe(U&& forwarded) noexcept : instance(Forward<U>(forwarded)){}
 };
