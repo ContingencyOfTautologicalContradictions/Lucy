@@ -4,6 +4,7 @@ import Lucy.Meta.Same;
 import Lucy.Core.Abort;
 import Lucy.Core.Forward;
 import Lucy.Meta.Underlying;
+import Lucy.Meta.RemoveConstant;
 import std;
 
 template<class T> concept IsAnomaly = Same<Underlying<T>, unsigned short>;
@@ -163,18 +164,16 @@ public:
     }
 };
 
-export template<class T> class [[nodiscard]] PackedException
+export template<class T> class [[nodiscard]] PackedException : public RemoveConstant<RemoveReferences<T>>
 {
 public:
-    Exception& e;
+    Exception& exception;
 
-    T instance;
-
-    template<class U> constexpr PackedException(Exception& ex, U&& forwarded) noexcept : e(ex), instance(Forward<U>(forwarded)){}
+    template<class U> constexpr PackedException(U&& forwarded, Exception& ex) noexcept : RemoveConstant<RemoveReferences<T>>(Forward<U>(forwarded)), exception(ex){}
 
     constexpr auto operator=(const IsAnomaly auto&& anomaly) noexcept -> void
     {
-        e = Forward<decltype(anomaly)>(anomaly);
+        exception = Forward<decltype(anomaly)>(anomaly);
     }
 };
 
