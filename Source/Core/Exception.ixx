@@ -163,4 +163,21 @@ public:
     }
 };
 
+export template<class T> class [[nodiscard]] PackedException
+{
+public:
+    Exception& e;
+
+    T instance;
+
+    using type = T;
+
+    template<class U> constexpr PackedException(Exception& ex, U&& forwarded) noexcept : e(ex), instance(Forward<U>(forwarded)){}
+
+    constexpr auto operator=(const IsAnomaly auto&& anomaly) noexcept -> void
+    {
+        e = Forward<decltype(anomaly)>(anomaly);
+    }
+};
+
 export constexpr inline bool exception_object_private_and_secret_stub = true;
