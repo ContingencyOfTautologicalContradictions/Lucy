@@ -170,8 +170,6 @@ public:
 
     T instance;
 
-    using type = T;
-
     template<class U> constexpr PackedException(Exception& ex, U&& forwarded) noexcept : e(ex), instance(Forward<U>(forwarded)){}
 
     constexpr auto operator=(const IsAnomaly auto&& anomaly) noexcept -> void
