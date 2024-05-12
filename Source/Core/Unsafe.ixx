@@ -17,10 +17,8 @@ public:
     constexpr auto operator=(Unsafe&& other) noexcept -> Unsafe& = delete;
 };
 
-export template<class T> class [[nodiscard]] PackedUnsafe
+export template<class T> class [[nodiscard]] PackedUnsafe : public T
 {
 public:
-    T instance;
-
-    template<class U> constexpr PackedUnsafe(U&& forwarded) noexcept : instance(Forward<U>(forwarded)){}
+    template<class U> constexpr PackedUnsafe(U&& forwarded) noexcept : T(Forward<U>(forwarded)){}
 };
