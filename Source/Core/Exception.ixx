@@ -36,7 +36,7 @@ public:
     }
 };
 
-class [[nodiscard]] Exception final
+export class [[nodiscard]] Exception final
 {
     std::string mreason;
 
