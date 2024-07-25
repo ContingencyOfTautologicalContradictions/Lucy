@@ -1,0 +1,11 @@
+#ifndef lucy_meta_trivially_copyable
+#define lucy_meta_trivially_copyable
+
+namespace Lucy::Meta
+{
+    template<class T> concept TriviallyCopyable = __is_trivially_copyable(T);
+
+    template<class T> concept NotTriviallyCopyable = not __is_trivially_copyable(T);
+}
+
+#endif
