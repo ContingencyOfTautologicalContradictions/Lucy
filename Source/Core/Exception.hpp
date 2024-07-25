@@ -11,6 +11,7 @@
 #define lucy_unwind do if(exception_object_private_secret.Unwind()) return; while(false)
 #define lucy_try exception_object_private_secret = [&]
 #define lucy_throw(anomaly, ...) do {exception_object_private_secret = anomaly; return __VA_ARGS__;} while(false)
+#define lucy_rethrow exception_object_private_secret =
 #define lucy_catch(...) if(exception_object_private_secret.CheckCatch() and exception_object_private_secret.Catch(__VA_ARGS__))
 #define lucy_any if(exception_object_private_secret.Any())
 #define lucy_finally if(exception_object_private_secret.Finally(); true)
