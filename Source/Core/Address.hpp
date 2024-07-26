@@ -3,7 +3,7 @@
 
 namespace Lucy
 {
-    template<class T> [[nodiscard]] inline constexpr auto Address(const T& object) noexcept -> T*
+    template<class T> [[nodiscard]] inline constexpr auto Address(T& object) noexcept -> T*
     {
         return __builtin_addressof(object);
     }
