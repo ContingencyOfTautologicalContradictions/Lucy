@@ -33,6 +33,7 @@ namespace Lucy::Detail
         switch(m_state)
         {
             case Thrown:
+                m_state = Catched;
                 return true;
             default:
                 return false;
