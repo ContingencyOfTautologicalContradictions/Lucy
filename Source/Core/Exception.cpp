@@ -16,6 +16,13 @@ namespace Lucy::Detail
         block();
     }
 
+    [[nodiscard]] constexpr auto Exception::Detect() noexcept -> Exception&
+    {
+        if(m_state not_eq Trying)
+            Abort();
+        return *this;
+    }
+
     [[nodiscard]] constexpr auto Exception::Unwind() const noexcept -> bool
     {
         return m_state == Thrown or m_state == Rethrown;
