@@ -29,11 +29,33 @@ The address of ``object`` in the form of a pointer.
 
 ```cpp
 #include <print>
+#include <Meta/Same.hpp>
 #include <Core/Address.hpp>
+
+class Foo
+{
+	int data = 42;
+public:
+	int& operator&()
+	{
+		return data;
+	}
+};
+
+template<class T> T* GetAddress(T& object)
+{
+	if constexpr(Lucy::Meta::Same<T*, decltype(&object)>)
+		return &object;
+	else
+		return Lucy::Address(object);
+}
 
 int main()
 {
 	int meow = 42;
-	std::println("The address of meow is {}", Lucy::Address(meow));
+	std::println("The address of meow is {}", GetAddress(meow));
+
+	Foo foo;
+	std::println("The address of foo is {}", GetAddress(foo));
 }
 ```
