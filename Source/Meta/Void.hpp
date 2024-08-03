@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_meta_void
 #define lucy_meta_void
 
@@ -56,4 +57,5 @@ namespace Lucy::Meta
     template<class T> concept NotVoid = not Detail::Void<T>::Value();
 }
 
+#endif
 #endif
