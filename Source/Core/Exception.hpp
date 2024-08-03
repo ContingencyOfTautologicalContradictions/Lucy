@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_core_exception
 #define lucy_core_exception
 #include "Abort.hpp"
@@ -110,4 +111,5 @@ namespace Lucy::Detail
     };
 }
 
+#endif
 #endif

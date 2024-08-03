@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #include "Exception.hpp"
 
 namespace Lucy::Detail
@@ -64,3 +65,5 @@ namespace Lucy::Detail
         }
     }
 }
+
+#endif
