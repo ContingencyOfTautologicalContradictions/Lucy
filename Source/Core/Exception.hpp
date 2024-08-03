@@ -102,7 +102,7 @@ namespace Lucy::Detail
                 m_state = Catched;
                 return true;
             }
-            return Catch(Forward<Anomaly<values>>(anomalies)...);
+            return Catch(lucy_forward(anomalies)...);
         }
 
         [[nodiscard]] constexpr auto Any() noexcept -> bool;
