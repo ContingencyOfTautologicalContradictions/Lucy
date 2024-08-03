@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_math_proposition
 #define lucy_math_proposition
 #include "../Core/Size.hpp"
@@ -85,4 +86,5 @@ namespace Lucy::Math
     }
 }
 
+#endif
 #endif
