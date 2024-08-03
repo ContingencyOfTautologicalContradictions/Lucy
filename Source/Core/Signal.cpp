@@ -6,7 +6,7 @@ namespace Lucy
 {
     auto Signal(Action action, Default) noexcept -> void
     {
-        int value = SIGTERM;
+        int value;
         switch(action)
         {
             using enum Action;
@@ -23,6 +23,7 @@ namespace Lucy
                 value = SIGSEGV;
             break;
             case Termination:
+                value = SIGTERM;
             break;
         }
         signal(value, SIG_DFL);
@@ -30,7 +31,7 @@ namespace Lucy
 
     auto Signal(Action action, Ignore) noexcept -> void
     {
-        int value = SIGTERM;
+        int value;
         switch(action)
         {
             using enum Action;
@@ -47,6 +48,7 @@ namespace Lucy
                 value = SIGSEGV;
             break;
             case Termination:
+                value = SIGTERM;
             break;
         }
         signal(value, SIG_IGN);
@@ -54,7 +56,7 @@ namespace Lucy
 
     auto Signal(Action action, void (*handler)(int)) noexcept -> void
     {
-        int value = SIGTERM;
+        int value;
         switch(action)
         {
             using enum Action;
@@ -71,6 +73,7 @@ namespace Lucy
                 value = SIGSEGV;
             break;
             case Termination:
+                value = SIGTERM;
             break;
         }
         signal(value, handler);
