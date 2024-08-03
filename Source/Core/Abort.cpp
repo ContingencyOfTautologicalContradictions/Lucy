@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #include "Abort.hpp"
 #ifdef _MSC_VER
 #include <intrin.h>
@@ -14,3 +15,5 @@ namespace Lucy
         #endif
     }
 }
+
+#endif
