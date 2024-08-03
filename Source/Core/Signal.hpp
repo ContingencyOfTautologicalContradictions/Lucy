@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_core_signal
 #define lucy_core_signal
 
@@ -51,4 +52,5 @@ namespace Lucy
     auto Signal(Action action, void (*handler)(int)) noexcept -> void;
 }
 
+#endif
 #endif

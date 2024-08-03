@@ -1,3 +1,4 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #include "Signal.hpp"
 #include <signal.h>
 
@@ -75,3 +76,5 @@ namespace Lucy
         signal(value, handler);
     }
 }
+
+#endif
