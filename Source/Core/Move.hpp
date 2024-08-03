@@ -1,13 +1,7 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_core_move
 #define lucy_core_move
 #include "../Meta/RemoveReferences.hpp"
-
-namespace Lucy
-{
-    template<class T> [[nodiscard]] inline constexpr auto Move(T&& moved_from) noexcept -> Meta::RemoveReferences<T>&&
-    {
-        return static_cast<Meta::RemoveReferences<T>&&>(moved_from);
-    }
-}
-
+#define lucy_move(value) static_cast<::Lucy::Meta::RemoveReferences<decltype(value)>&&>(value)
+#endif
 #endif
