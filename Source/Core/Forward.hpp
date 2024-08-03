@@ -1,18 +1,6 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_core_forward
 #define lucy_core_forward
-#include "../Meta/RemoveReferences.hpp"
-
-namespace Lucy
-{
-    template<class T> [[nodiscard]] inline constexpr auto Forward(Meta::RemoveReferences<T>& value) noexcept -> T&&
-    {
-        return static_cast<T&&>(value);
-    }
-
-    template<class T> [[nodiscard]] inline constexpr auto Forward(Meta::RemoveReferences<T>&& value) noexcept -> T&&
-    {
-        return static_cast<T&&>(value);
-    }
-}
-
+#define lucy_forward(value) static_cast<decltype(value)&&>(value)
+#endif
 #endif
