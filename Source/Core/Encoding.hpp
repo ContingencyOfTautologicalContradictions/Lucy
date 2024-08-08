@@ -5,7 +5,6 @@ namespace Lucy
 {
     enum class [[nodiscard]] Encoding : unsigned char
     {
-        ASCII,
         UTF8,
         UTF16,
         UTF32
