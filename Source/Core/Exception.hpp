@@ -57,7 +57,11 @@ namespace Lucy::Detail
 
         State m_state = Idle;
     public:
-        constexpr ~Exception() noexcept;
+        constexpr ~Exception() noexcept
+        {
+            if(m_state == Thrown or m_state == Rethrown)
+                Abort();
+        }
 
         inline constexpr Exception() noexcept = default;
 
@@ -69,13 +73,32 @@ namespace Lucy::Detail
 
         constexpr auto operator=(Exception&&) noexcept -> Exception& = delete;
 
-        constexpr auto operator=(const TryBlock auto&& block) noexcept -> void;
+        constexpr auto operator=(const TryBlock auto&& block) noexcept -> void
+        {
+            if(m_state == Thrown or m_state == Rethrown)
+                Abort();
+            m_state = Trying;
+            block();
+        }
 
-        [[nodiscard]] constexpr auto Detect() noexcept -> Exception&;
+        [[nodiscard]] constexpr auto Detect() noexcept -> Exception&
+        {
+            if(m_state not_eq Trying)
+                Abort();
+            return *this;
+        }
 
-        [[nodiscard]] constexpr auto Unwind() const noexcept -> bool;
+        [[nodiscard]] constexpr auto Unwind() const noexcept -> bool
+        {
+            return m_state == Thrown or m_state == Rethrown;
+        }
 
-        [[nodiscard]] constexpr auto CheckCatch() const noexcept -> bool;
+        [[nodiscard]] constexpr auto CheckCatch() const noexcept -> bool
+        {
+            if(m_state == Idle)
+                Abort();
+            return m_state == Thrown;
+        }
 
         template<unsigned int value> inline constexpr auto operator=(Anomaly<value>) noexcept -> void
         {
@@ -105,9 +128,34 @@ namespace Lucy::Detail
             return Catch(lucy_forward(anomalies)...);
         }
 
-        [[nodiscard]] constexpr auto Any() noexcept -> bool;
+        [[nodiscard]] constexpr auto Any() noexcept -> bool
+        {
+            switch(m_state)
+            {
+                case Thrown:
+                    m_state = Catched;
+                    return true;
+                default:
+                    return false;
+                case Idle:
+                    Abort();
+            }
+        }
 
-        constexpr auto Finally() noexcept -> void;
+        constexpr auto Finally() noexcept -> void
+        {
+            switch(m_state)
+            {
+                case Idle:
+                case Thrown:
+                    Abort();
+                case Rethrown:
+                    m_state = Thrown;
+                break;
+                default:
+                    m_state = Idle;
+            }
+        }
     };
 }
 
