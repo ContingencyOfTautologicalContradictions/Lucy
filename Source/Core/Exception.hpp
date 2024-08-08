@@ -57,7 +57,7 @@ namespace Lucy::Detail
 
         State m_state = Idle;
     public:
-        constexpr ~Exception() noexcept
+        inline constexpr ~Exception() noexcept
         {
             if(m_state == Thrown or m_state == Rethrown)
                 Abort();
@@ -73,7 +73,7 @@ namespace Lucy::Detail
 
         constexpr auto operator=(Exception&&) noexcept -> Exception& = delete;
 
-        constexpr auto operator=(const TryBlock auto&& block) noexcept -> void
+        inline constexpr auto operator=(const TryBlock auto&& block) noexcept -> void
         {
             if(m_state == Thrown or m_state == Rethrown)
                 Abort();
@@ -81,19 +81,19 @@ namespace Lucy::Detail
             block();
         }
 
-        [[nodiscard]] constexpr auto Detect() noexcept -> Exception&
+        [[nodiscard]] inline constexpr auto Detect() noexcept -> Exception&
         {
             if(m_state not_eq Trying)
                 Abort();
             return *this;
         }
 
-        [[nodiscard]] constexpr auto Unwind() const noexcept -> bool
+        [[nodiscard]] inline constexpr auto Unwind() const noexcept -> bool
         {
             return m_state == Thrown or m_state == Rethrown;
         }
 
-        [[nodiscard]] constexpr auto CheckCatch() const noexcept -> bool
+        [[nodiscard]] inline constexpr auto CheckCatch() const noexcept -> bool
         {
             if(m_state == Idle)
                 Abort();
@@ -128,7 +128,7 @@ namespace Lucy::Detail
             return Catch(lucy_forward(anomalies)...);
         }
 
-        [[nodiscard]] constexpr auto Any() noexcept -> bool
+        [[nodiscard]] inline constexpr auto Any() noexcept -> bool
         {
             switch(m_state)
             {
@@ -142,7 +142,7 @@ namespace Lucy::Detail
             }
         }
 
-        constexpr auto Finally() noexcept -> void
+        inline constexpr auto Finally() noexcept -> void
         {
             switch(m_state)
             {
