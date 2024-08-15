@@ -5,6 +5,8 @@
 namespace Lucy
 {
     using Size = decltype(sizeof(bool));
+
+    using Ssize = __make_signed(Size);
 }
 
 #endif
