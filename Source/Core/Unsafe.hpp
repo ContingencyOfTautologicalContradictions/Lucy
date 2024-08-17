@@ -9,9 +9,9 @@ namespace Lucy::Detail
     class [[nodiscard]] Unsafe final
     {
     public:
-        inline constexpr ~Unsafe() noexcept = default;
+        constexpr ~Unsafe() noexcept = default;
 
-        inline constexpr Unsafe() noexcept = default;
+        constexpr Unsafe() noexcept = default;
 
         constexpr Unsafe(const Unsafe&) noexcept = delete;
 
