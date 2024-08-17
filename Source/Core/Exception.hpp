@@ -27,9 +27,9 @@ namespace Lucy::Detail
     template<unsigned int value> requires(value > 0ul) class [[nodiscard]] Anomaly final
     {
     public:
-        inline constexpr ~Anomaly() noexcept = default;
+        constexpr ~Anomaly() noexcept = default;
 
-        inline constexpr Anomaly() noexcept = default;
+        constexpr Anomaly() noexcept = default;
 
         constexpr Anomaly(const Anomaly&) noexcept = default;
 
@@ -57,13 +57,13 @@ namespace Lucy::Detail
 
         State m_state = Idle;
     public:
-        inline constexpr ~Exception() noexcept
+        constexpr ~Exception() noexcept
         {
             if(m_state == Thrown or m_state == Rethrown)
                 Abort();
         }
 
-        inline constexpr Exception() noexcept = default;
+        constexpr Exception() noexcept = default;
 
         constexpr Exception(const Exception&) noexcept = delete;
 
@@ -73,7 +73,7 @@ namespace Lucy::Detail
 
         constexpr auto operator=(Exception&&) noexcept -> Exception& = delete;
 
-        inline constexpr auto operator=(const TryBlock auto&& block) noexcept -> void
+        constexpr auto operator=(const TryBlock auto&& block) noexcept -> void
         {
             if(m_state == Thrown or m_state == Rethrown)
                 Abort();
@@ -81,26 +81,26 @@ namespace Lucy::Detail
             block();
         }
 
-        [[nodiscard]] inline constexpr auto Detect() noexcept -> Exception&
+        [[nodiscard]] constexpr auto Detect() noexcept -> Exception&
         {
             if(m_state not_eq Trying)
                 Abort();
             return *this;
         }
 
-        [[nodiscard]] inline constexpr auto Unwind() const noexcept -> bool
+        [[nodiscard]] constexpr auto Unwind() const noexcept -> bool
         {
             return m_state == Thrown or m_state == Rethrown;
         }
 
-        [[nodiscard]] inline constexpr auto CheckCatch() const noexcept -> bool
+        [[nodiscard]] constexpr auto CheckCatch() const noexcept -> bool
         {
             if(m_state == Idle)
                 Abort();
             return m_state == Thrown;
         }
 
-        template<unsigned int value> inline constexpr auto operator=(Anomaly<value>) noexcept -> void
+        template<unsigned int value> constexpr auto operator=(Anomaly<value>) noexcept -> void
         {
             if(m_state == Idle or m_state == Thrown or m_state == Rethrown)
                 Abort();
@@ -108,7 +108,7 @@ namespace Lucy::Detail
             m_code = value;
         }
 
-        template<unsigned int value> [[nodiscard]] inline constexpr auto Catch(Anomaly<value>) noexcept -> bool
+        template<unsigned int value> [[nodiscard]] constexpr auto Catch(Anomaly<value>) noexcept -> bool
         {
             if(m_code == value)
             {
@@ -118,7 +118,7 @@ namespace Lucy::Detail
             return false;
         }
 
-        template<unsigned int value, unsigned int... values> [[nodiscard]] inline constexpr auto Catch(Anomaly<value>, Anomaly<values>&&... anomalies) noexcept -> bool
+        template<unsigned int value, unsigned int... values> [[nodiscard]] constexpr auto Catch(Anomaly<value>, Anomaly<values>&&... anomalies) noexcept -> bool
         {
             if(m_code == value)
             {
@@ -128,7 +128,7 @@ namespace Lucy::Detail
             return Catch(lucy_forward(anomalies)...);
         }
 
-        [[nodiscard]] inline constexpr auto Any() noexcept -> bool
+        [[nodiscard]] constexpr auto Any() noexcept -> bool
         {
             switch(m_state)
             {
@@ -142,7 +142,7 @@ namespace Lucy::Detail
             }
         }
 
-        inline constexpr auto Finally() noexcept -> void
+        constexpr auto Finally() noexcept -> void
         {
             switch(m_state)
             {
