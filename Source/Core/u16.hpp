@@ -274,12 +274,12 @@ namespace Lucy
         }
     }
 
-    [[nodiscard]] inline constexpr u8::operator u16() const noexcept
+    [[nodiscard]] constexpr u8::operator u16() const noexcept
     {
         return u16 lucy_unsafe(static_cast<unsigned short>(m_value));
     }
 
-    [[nodiscard]] inline constexpr s8::operator u16() const noexcept
+    [[nodiscard]] constexpr s8::operator u16() const noexcept
     {
         return u16 lucy_unsafe(static_cast<unsigned short>(m_value));
     }
