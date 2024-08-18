@@ -1,0 +1,313 @@
+#if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
+#ifndef lucy_core_u32
+#define lucy_core_u32
+#include "f16.hpp"
+
+namespace Lucy
+{
+    class [[nodiscard]] u32
+    {
+        unsigned int m_value;
+    public:
+        using Native = unsigned int;
+
+        [[nodiscard]] static consteval auto Bits() noexcept -> u8
+        {
+            using namespace ::Lucy::Literal;
+            return 32_u8;
+        }
+
+        [[nodiscard]] static consteval auto Minimum() noexcept -> u32
+        {
+            return u32 lucy_unsafe(0ul);
+        }
+
+        [[nodiscard]] static consteval auto Maximum() noexcept -> u32
+        {
+            return u32 lucy_unsafe(4294967295ul);
+        }
+
+        constexpr ~u32() noexcept = default;
+
+        constexpr u32() noexcept : m_value(0ul){}
+
+        constexpr u32(const u32& other) noexcept = default;
+
+        constexpr u32(u32&& other) noexcept = default;
+
+        constexpr auto operator=(const u32& other) noexcept -> u32& = default;
+
+        constexpr auto operator=(u32&& other) noexcept -> u32& = default;
+
+        constexpr u32 lucy_unreliable() noexcept{}
+
+        constexpr u32 lucy_unreliable(const unsigned int value) noexcept : m_value(value){}
+
+        [[nodiscard]] constexpr operator bool() const noexcept
+        {
+            return static_cast<bool>(m_value);
+        }
+
+        [[nodiscard]] explicit constexpr operator u8() const noexcept
+        {
+            return u8 lucy_unsafe(static_cast<unsigned char>(m_value));
+        }
+
+        [[nodiscard]] explicit constexpr operator s8() const noexcept
+        {
+            return s8 lucy_unsafe(static_cast<signed char>(m_value));
+        }
+
+        [[nodiscard]] explicit constexpr operator u16() const noexcept
+        {
+            return u16 lucy_unsafe(static_cast<unsigned short>(m_value));
+        }
+
+        [[nodiscard]] explicit constexpr operator s16() const noexcept
+        {
+            return s16 lucy_unsafe(static_cast<short>(m_value));
+        }
+
+        [[nodiscard]] explicit constexpr operator f16() const noexcept
+        {
+            return f16 lucy_unsafe(static_cast<_Float16>(m_value));
+        }
+
+        [[nodiscard]] explicit constexpr operator s32() const noexcept;
+
+        [[nodiscard]] explicit constexpr operator f32() const noexcept;
+
+        [[nodiscard]] explicit constexpr operator u64() const noexcept;
+
+        [[nodiscard]] explicit constexpr operator s64() const noexcept;
+
+        [[nodiscard]] explicit constexpr operator f64() const noexcept;
+
+        [[nodiscard]] constexpr auto operator+() const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value);
+        }
+
+        constexpr auto operator++() noexcept -> u32&
+        {
+            ++m_value;
+            return *this;
+        }
+
+        constexpr auto operator++(int) noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value++);
+        }
+
+        constexpr auto operator--() noexcept -> u32&
+        {
+            --m_value;
+            return *this;
+        }
+
+        constexpr auto operator--(int) noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value--);
+        }
+
+        [[nodiscard]] constexpr auto operator==(const u32 other) const noexcept -> bool
+        {
+            return m_value == other.m_value;
+        }
+
+        [[nodiscard]] constexpr auto operator not_eq(const u32 other) const noexcept -> bool
+        {
+            return m_value not_eq other.m_value;
+        }
+
+        [[nodiscard]] constexpr auto operator<(const u32 other) const noexcept -> bool
+        {
+            return m_value < other.m_value;
+        }
+
+        [[nodiscard]] constexpr auto operator>(const u32 other) const noexcept -> bool
+        {
+            return m_value > other.m_value;
+        }
+
+        [[nodiscard]] constexpr auto operator<=(const u32 other) const noexcept -> bool
+        {
+            return m_value <= other.m_value;
+        }
+
+        [[nodiscard]] constexpr auto operator>=(const u32 other) const noexcept -> bool
+        {
+            return m_value >= other.m_value;
+        }
+
+        [[nodiscard]] constexpr auto operator<=>(const u32 other) const noexcept -> Comparison
+        {
+            using enum Comparison;
+            if(m_value < other.m_value)
+                return Lesser;
+            else if(m_value > other.m_value)
+                return Greater;
+            return Equal;
+        }
+
+        constexpr auto operator and_eq(const u32 other) noexcept -> u32&
+        {
+            m_value and_eq other.m_value;
+            return *this;
+        }
+        
+        constexpr auto operator or_eq(const u32 other) noexcept -> u32&
+        {
+            m_value or_eq other.m_value;
+            return *this;
+        }
+
+        constexpr auto operator xor_eq(const u32 other) noexcept -> u32&
+        {
+            m_value xor_eq other.m_value;
+            return *this;
+        }
+
+        constexpr auto operator<<=(const u8 shifts) noexcept -> u32&
+        {
+            m_value <<= shifts.Value();
+            return *this;
+        }
+
+        constexpr auto operator>>=(const u8 shifts) noexcept -> u32&
+        {
+            m_value >>= shifts.Value();
+            return *this;
+        }
+
+        constexpr auto operator+=(const u32 other) noexcept -> u32&
+        {
+            m_value += other.m_value;
+            return *this;
+        }
+
+        constexpr auto operator-=(const u32 other) noexcept -> u32&
+        {
+            m_value -= other.m_value;
+            return *this;
+        }
+
+        constexpr auto operator*=(const u32 other) noexcept -> u32&
+        {
+            m_value *= other.m_value;
+            return *this;
+        }
+
+        constexpr auto operator/=(const u32 other) noexcept -> u32&
+        {
+            m_value /= other.m_value;
+            return *this;
+        }
+
+        constexpr auto operator%=(const u32 other) noexcept -> u32&
+        {
+            m_value %= other.m_value;
+            return *this;
+        }
+
+        [[nodiscard]] constexpr auto operator compl() const noexcept -> u32
+        {
+            return u32 lucy_unsafe(compl m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator bitand(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value bitand other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator bitor(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value bitor other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator xor(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value xor other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator<<(const u8 shifts) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value << shifts.Value());
+        }
+
+        [[nodiscard]] constexpr auto operator>>(const u8 shifts) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value >> shifts.Value());
+        }
+
+        [[nodiscard]] constexpr auto operator+(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value + other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator-(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value - other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator*(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value * other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator/(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value / other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto operator%(const u32 other) const noexcept -> u32
+        {
+            return u32 lucy_unsafe(m_value % other.m_value);
+        }
+
+        [[nodiscard]] constexpr auto Value() const noexcept -> unsigned int
+        {
+            return m_value;
+        }
+    };
+
+    namespace Literal
+    {
+        void LiteralIsBiggerThan4294967295() noexcept;
+
+        [[nodiscard]] consteval auto operator ""_u32(const unsigned long long int value) noexcept -> u32
+        {
+            if(value > 4294967295ull)
+                LiteralIsBiggerThan4294967295();
+            return u32 lucy_unsafe(static_cast<unsigned int>(value));
+        }
+    }
+
+    [[nodiscard]] constexpr u8::operator u32() const noexcept
+    {
+        return u32 lucy_unsafe(static_cast<unsigned int>(m_value));
+    }
+
+    [[nodiscard]] constexpr s8::operator u32() const noexcept
+    {
+        return u32 lucy_unsafe(static_cast<unsigned int>(m_value));
+    }
+
+    [[nodiscard]] constexpr u16::operator u32() const noexcept
+    {
+        return u32 lucy_unsafe(static_cast<unsigned int>(m_value));
+    }
+
+    [[nodiscard]] constexpr s16::operator u32() const noexcept
+    {
+        return u32 lucy_unsafe(static_cast<unsigned int>(m_value));
+    }
+
+    [[nodiscard]] constexpr f16::operator u32() const noexcept
+    {
+        return u32 lucy_unsafe(static_cast<unsigned int>(m_value));
+    }
+}
+
+#endif
+#endif
