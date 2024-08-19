@@ -10,6 +10,8 @@ namespace Lucy
     {
         _Float16 m_value;
     public:
+        using Native = _Float16;
+
         [[nodiscard]] static consteval auto Bits() noexcept -> u8
         {
             using namespace ::Lucy::Literal;
