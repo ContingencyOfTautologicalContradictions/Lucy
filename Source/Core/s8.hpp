@@ -228,7 +228,7 @@ namespace Lucy
             return s8 lucy_unsafe(m_value << shifts.Value());
         }
 
-        [[nodiscard]] constexpr auto operator>>(const s8 shifts) const noexcept -> s8
+        [[nodiscard]] constexpr auto operator>>(const u8 shifts) const noexcept -> s8
         {
             return s8 lucy_unsafe(m_value >> shifts.Value());
         }
