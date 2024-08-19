@@ -19,7 +19,7 @@ namespace Lucy
 
         [[nodiscard]] static consteval auto Minimum() noexcept -> s64
         {
-            return s64 lucy_unsafe(-9223372036854775808ll);
+            return s64 lucy_unsafe(-9223372036854775807ll - 1ll);
         }
 
         [[nodiscard]] static consteval auto Maximum() noexcept -> s64
