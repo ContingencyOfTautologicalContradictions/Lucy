@@ -5,6 +5,8 @@
 namespace Lucy::Meta
 {
     template<class T, class U> concept Same = __is_same(T, U);
+
+    template<class T, class U> concept NotSame = not __is_same(T, U);
 }
 
 #endif
