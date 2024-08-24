@@ -4,15 +4,9 @@
 
 namespace Lucy::Meta
 {
-    template<class From, class To> concept Convertible = requires(From from)
-    {
-        static_cast<To>(from);
-    };
+    template<class From, class To> concept Convertible = __is_convertible(From, To);
 
-    template<class From, class To> concept NotConvertible = not requires(From from)
-    {
-        static_cast<To>(from);
-    };
+    template<class From, class To> concept NotConvertible = not __is_convertible(From, To);
 }
 
 #endif
