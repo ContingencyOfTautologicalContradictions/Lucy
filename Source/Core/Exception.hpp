@@ -8,6 +8,7 @@
 #define lucy_anomaly static constexpr ::Lucy::Detail::Anomaly
 #define lucy_record if([[maybe_unused]] ::Lucy::Detail::Exception exception_object_private_secret; true)
 #define lucy_throwable(...) ([[maybe_unused]] ::Lucy::Detail::Exception& exception_object_private_secret __VA_OPT__(,) __VA_ARGS__)
+#define lucy_braced_detect(...) {exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__}
 #define lucy_detect(...) (exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__)
 #define lucy_unwind do if(exception_object_private_secret.Unwind()) return; while(false)
 #define lucy_try exception_object_private_secret = [&]
