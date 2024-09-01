@@ -5,7 +5,7 @@
 #include "Forward.hpp"
 #include "../Meta/Void.hpp"
 #define lucy_exception struct
-#define lucy_anomaly static constexpr ::Lucy::Detail::Anomaly
+#define lucy_anomaly static constexpr ::Lucy::Detail::Anomaly<__COUNTER__>
 #define lucy_record if([[maybe_unused]] ::Lucy::Detail::Exception exception_object_private_secret; true)
 #define lucy_throwable(...) ([[maybe_unused]] ::Lucy::Detail::Exception& exception_object_private_secret __VA_OPT__(,) __VA_ARGS__)
 #define lucy_braced_detect(...) {exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__}
@@ -20,6 +20,8 @@
 
 namespace Lucy::Detail
 {
+    static constexpr auto MaybeZero = __COUNTER__;
+
     template<class Block> concept TryBlock = requires(Block&& block)
     {
         {block()} -> Meta::Void;
@@ -57,6 +59,7 @@ namespace Lucy::Detail
         unsigned int m_code = 0ul;
 
         State m_state = Idle;
+        #define lmao pepe_##__COUNTER__:;
     public:
         constexpr ~Exception() noexcept
         {
