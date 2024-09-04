@@ -21,7 +21,7 @@
 
 namespace Lucy::Detail
 {
-    static constexpr auto MaybeZero = __COUNTER__;
+    [[maybe_unused]] static constexpr auto MaybeZero = __COUNTER__;
 
     template<class Block> concept TryBlock = requires(Block&& block)
     {
