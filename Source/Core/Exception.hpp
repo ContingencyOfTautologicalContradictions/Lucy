@@ -12,6 +12,8 @@
 #define lucy_braced_detect(...) {exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__}
 #define lucy_detect(...) (exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__)
 #define lucy_unwind do if(exception_object_private_secret.Unwind()) return; while(false)
+#define lucy_subscript_detect_and_unwind(...) [exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__]; do if(exception_object_private_secret.Unwind()) return; while(false)
+#define lucy_braced_detect_and_unwind(...) {exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__}; do if(exception_object_private_secret.Unwind()) return; while(false)
 #define lucy_detect_and_unwind(...) (exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__); do if(exception_object_private_secret.Unwind()) return; while(false)
 #define lucy_try exception_object_private_secret = [&]
 #define lucy_throw(anomaly, ...) do {exception_object_private_secret = anomaly; return __VA_ARGS__;} while(false)
