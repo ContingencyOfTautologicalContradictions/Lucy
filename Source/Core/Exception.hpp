@@ -11,11 +11,7 @@
 #define lucy_subscript_detect(...) [exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__]
 #define lucy_braced_detect(...) {exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__}
 #define lucy_detect(...) (exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__)
-#define lucy_unwind do if(exception_object_private_secret.Unwind()) return; while(false)
-#define lucy_subscript_detect_and_unwind(...) [exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__]; do if(exception_object_private_secret.Unwind()) return; while(false)
-#define lucy_braced_detect_and_unwind(...) {exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__}; do if(exception_object_private_secret.Unwind()) return; while(false)
-#define lucy_detect_and_unwind(...) (exception_object_private_secret.Detect() __VA_OPT__(,) __VA_ARGS__); do if(exception_object_private_secret.Unwind()) return; while(false)
-#define lucy_try exception_object_private_secret = [&]
+#define lucy_try exception_object_private_secret.Try
 #define lucy_throw(anomaly, ...) do {exception_object_private_secret = anomaly; return __VA_ARGS__;} while(false)
 #define lucy_rethrow exception_object_private_secret =
 #define lucy_catch(...) if(exception_object_private_secret.CheckCatch() and exception_object_private_secret.Catch(__VA_ARGS__))
@@ -63,7 +59,23 @@ namespace Lucy::Detail
         unsigned int m_code = 0ul;
 
         State m_state = Idle;
-        #define lmao pepe_##__COUNTER__:;
+
+        [[nodiscard]] constexpr auto Unwind() const noexcept -> bool
+        {
+            return m_state == Thrown or m_state == Rethrown;
+        }
+
+        constexpr auto ExecuteTry(auto&& block) noexcept -> void
+        {
+            block();
+        }
+
+        constexpr auto ExecuteTry(auto&& block, auto&&... blocks) noexcept -> void
+        {
+            block();
+            if(not Unwind())
+                ExecuteTry(lucy_forward(blocks)...);
+        }
     public:
         constexpr ~Exception() noexcept
         {
@@ -81,12 +93,12 @@ namespace Lucy::Detail
 
         constexpr auto operator=(Exception&&) noexcept -> Exception& = delete;
 
-        constexpr auto operator=(const TryBlock auto&& block) noexcept -> void
+        constexpr auto Try(TryBlock auto&& block, TryBlock auto&&... blocks) noexcept -> void
         {
             if(m_state == Thrown or m_state == Rethrown)
                 Abort();
             m_state = Trying;
-            block();
+            ExecuteTry(lucy_forward(block), lucy_forward(blocks)...);
         }
 
         [[nodiscard]] constexpr auto Detect() noexcept -> Exception&
@@ -94,11 +106,6 @@ namespace Lucy::Detail
             if(m_state not_eq Trying)
                 Abort();
             return *this;
-        }
-
-        [[nodiscard]] constexpr auto Unwind() const noexcept -> bool
-        {
-            return m_state == Thrown or m_state == Rethrown;
         }
 
         [[nodiscard]] constexpr auto CheckCatch() const noexcept -> bool
