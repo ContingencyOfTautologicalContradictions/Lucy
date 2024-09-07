@@ -1,7 +1,6 @@
 #if lucy_major >= 0 and lucy_middle >= 0 and lucy_minor >= 1
 #ifndef lucy_core_result
 #define lucy_core_result
-#include "Size.hpp"
 #include "Abort.hpp"
 #include "Forward.hpp"
 #include "../Meta/Constructible.hpp"
