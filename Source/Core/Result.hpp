@@ -120,14 +120,14 @@ namespace Lucy
         {
             if(m_error)
                 Abort();
-            return Detail::Value<0uz>(m_variant);
+            return Detail::Value<false>(m_variant);
         }
 
         constexpr auto Error() noexcept -> ErrorT&
         {
             if(not m_error)
                 Abort();
-            return Detail::Value<1uz>(m_variant);
+            return Detail::Value<true>(m_variant);
         }
     };
 }
