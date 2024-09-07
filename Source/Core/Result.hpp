@@ -85,7 +85,7 @@ namespace Lucy
             {
                 m_error = false;
                 m_variant.m_tail.m_actual.~ErrorT();
-                new (&m_variant.m_actual) ErrorT(lucy_forward(argument));
+                new (&m_variant.m_actual) T(lucy_forward(argument));
             }
             else
             {
