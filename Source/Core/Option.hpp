@@ -31,7 +31,7 @@ namespace Lucy
 
             constexpr ~OptionH() noexcept requires(Meta::TriviallyCopyable<T>){}
 
-            template<class... Args> constexpr OptionH(OptionCopy<true>, Args&&... args) noexcept : m_tail(ResultH<U...>(OptionCopy<false>{}, lucy_forward(args)...)){}
+            template<class... Args> constexpr OptionH(OptionCopy<true>, Args&&... args) noexcept : m_tail(OptionH<U...>(OptionCopy<false>{}, lucy_forward(args)...)){}
 
             template<class... Args> constexpr OptionH(OptionCopy<false>, Args&&... args) noexcept : m_actual(lucy_forward(args)...){}
         };
