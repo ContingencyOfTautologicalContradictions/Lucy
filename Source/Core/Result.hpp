@@ -57,7 +57,7 @@ namespace Lucy
         }
     }
 
-    class [[nodiscard]] ConstructT final{};
+    class [[nodiscard]] ConstructOk final{};
 
     class [[nodiscard]] ConstructError final{};
 
@@ -75,7 +75,7 @@ namespace Lucy
 
         template<class... Arguments> requires(Meta::Constructible<ErrorT, Arguments...>) constexpr Result(Arguments&&... arguments) noexcept : m_error(true), m_variant(Detail::ResultCopy<true>{}, lucy_forward(arguments)...){}
 
-        template<class... Arguments> requires(Meta::Constructible<T, Arguments...>) constexpr Result(ConstructT, Arguments&&... arguments) noexcept : m_error(false), m_variant(Detail::ResultCopy<false>{}, lucy_forward(arguments)...){}
+        template<class... Arguments> requires(Meta::Constructible<T, Arguments...>) constexpr Result(ConstructOk, Arguments&&... arguments) noexcept : m_error(false), m_variant(Detail::ResultCopy<false>{}, lucy_forward(arguments)...){}
 
         template<class... Arguments> requires(Meta::Constructible<ErrorT, Arguments...>) constexpr Result(ConstructError, Arguments&&... arguments) noexcept : m_error(true), m_variant(Detail::ResultCopy<true>{}, lucy_forward(arguments)...){}
 
