@@ -142,7 +142,7 @@ namespace Lucy
             return *this;
         }
 
-        [[nodiscard]] constexpr auto Value() const noexcept -> char8_t
+        [[nodiscard]] constexpr auto Value() const noexcept -> const char8_t&
         {
             return m_value;
         }
