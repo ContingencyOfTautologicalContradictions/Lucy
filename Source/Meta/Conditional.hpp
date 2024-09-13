@@ -6,20 +6,20 @@ namespace Lucy::Meta
 {
     namespace Detail
     {
-        template<class, class T, bool> class Condition
+        template<bool, class, class T> class Condition
         {
         public:
             using Type = T;
         };
 
-        template<class T, class U> class Condition<T, U, true>
+        template<class T, class U> class Condition<true, T, U>
         {
         public:
             using Type = T;
         };
     }
 
-    template<class T, class U, bool Condition> using Conditional = Detail::Condition<T, U, Condition>::Type;
+    template<bool Condition, class T, class U> using Conditional = Detail::Condition<Condition, T, U>::Type;
 }
 
 #endif
